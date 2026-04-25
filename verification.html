@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Your Account - Claim Followers</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .verification-container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+      width: 100%;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    
+    .step-indicator {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+    }
+    
+    .step {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      color: #999;
+      font-weight: 600;
+      font-size: 0.85rem;
+      position: relative;
+    }
+    
+    .step.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .step.completed {
+      background: #4caf50;
+      color: white;
+    }
+    
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: #e0e0e0;
+    }
+    
+    .step-line.completed {
+      background: #4caf50;
+    }
+    
+    .success-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      animation: scaleIn 0.5s ease-out;
+    }
+    
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+    
+    h1 {
+      font-size: 1.8rem;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    
+    .info-card {
+      background: #f8f9fa;
+      border-left: 4px solid #667eea;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    
+    .info-card h3 {
+      color: #1a1a1a;
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .info-item:last-child {
+      border-bottom: none;
+    }
+    
+    .info-item-label {
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    
+    .info-item-value {
+      color: #667eea;
+      font-weight: 600;
+    }
+    
+    .timeline {
+      text-align: left;
+      margin: 2rem 0;
+    }
+    
+    .timeline-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      width: 2px;
+      height: calc(100% + 0.5rem);
+      background: #e0e0e0;
+    }
+    
+    .timeline-item:last-child::before {
+      display: none;
+    }
+    
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e3f2fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px #667eea;
+    }
+    
+    .timeline-item.completed .timeline-dot {
+      background: #4caf50;
+      box-shadow: 0 0 0 2px #4caf50;
+      color: white;
+    }
+    
+    .timeline-content h4 {
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+    
+    .timeline-content p {
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      width: 33%;
+      animation: fillProgress 2s ease-out;
+    }
+    
+    @keyframes fillProgress {
+      from {
+        width: 0%;
+      }
+      to {
+        width: 33%;
+      }
+    }
+    
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .btn {
+      padding: 0.85rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #1a1a1a;
+      border: 2px solid #e0e0e0;
+    }
+    
+    .btn-secondary:hover {
+      border-color: #667eea;
+      color: #667eea;
+    }
+    
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .warning-box {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #e65100;
+      line-height: 1.6;
+    }
+    
+    .email-verification {
+      background: #e8f5e9;
+      border: 2px dashed #4caf50;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .email-verification-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .email-verification h3 {
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    
+    .email-verification p {
+      color: #558b2f;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    
+    .countdown {
+      font-size: 1.2rem;
+      color: #667eea;
+      font-weight: 700;
+      margin: 1rem 0;
+    }
+    
+    @media (max-width: 600px) {
+      .verification-container {
+        padding: 2rem 1rem;
+      }
+      
+      .step {
+        width: 32px;
+        height: 32px;
+        font-size: 0.75rem;
+      }
+      
+      .action-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="verification-container">
+    <!-- Step Indicator -->
+    <div class="step-indicator">
+      <div class="step completed">1</div>
+      <div class="step-line completed"></div>
+      <div class="step active">2</div>
+      <div class="step-line"></div>
+      <div class="step">3</div>
+    </div>
+    
+    <!-- Success Message -->
+    <div class="success-icon">✓</div>
+    <h1>Account Verified!</h1>
+    <p class="subtitle">Great news! Your Instagram account has been successfully verified. Your followers are being processed.</p>
+    
+    <!-- Account Info -->
+    <div class="info-card">
+      <h3>Your Order Details</h3>
+      <div class="info-item">
+        <span class="info-item-label">Username</span>
+        <span class="info-item-value" id="displayUsername">@username</span>
+      </div>
+      <div class="info-item">
+        <span class="info-item-label">Followers to Receive</span>
+        <span class="info-item-value">5,000</span>
+      </div>
+      <div class="info-item">
+        <span class="info-item-label">Expected Delivery</span>
+        <span class="info-item-value">24 Hours</span>
+      </div>
+      <div class="info-item">
+        <span class="info-item-label">Order ID</span>
+        <span class="info-item-value" id="orderId">ORD-2024-12345</span>
+      </div>
+    </div>
+    
+    <!-- Progress -->
+    <div>
+      <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">Processing Status</p>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+    
+    <!-- Email Verification -->
+    <div class="email-verification">
+      <div class="email-verification-icon">📧</div>
+      <h3>Confirmation Email Sent</h3>
+      <p>Check your email for order confirmation and delivery updates. Add us to your contacts to ensure emails don't go to spam.</p>
+    </div>
+    
+    <!-- Timeline -->
+    <div class="timeline">
+      <div class="timeline-item completed">
+        <div class="timeline-dot">✓</div>
+        <div class="timeline-content">
+          <h4>Account Verified</h4>
+          <p>Your Instagram account has been verified successfully</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item active">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-content">
+          <h4>Processing Order</h4>
+          <p>Your followers are being delivered. This usually takes 24 hours</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-content">
+          <h4>Followers Delivered</h4>
+          <p>You'll receive a confirmation email when followers arrive</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Countdown -->
+    <div class="countdown">
+      Followers arriving in: <span id="countdown">24:00:00</span>
+    </div>
+    
+    <!-- Buttons -->
+    <div class="action-buttons">
+      <a href="index.html" class="btn btn-secondary">← Back Home</a>
+      <button class="btn btn-primary" onclick="copyOrderId()">Copy Order ID</button>
+    </div>
+    
+    <!-- Warning -->
+    <div class="warning-box">
+      <strong>⚠ Important:</strong> Keep your account active and don't engage in suspicious activity. Followers will be delivered gradually over 24 hours to maintain account safety.
+    </div>
+  </div>
+
+  <script>
+    // Generate Order ID
+    function generateOrderId() {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const random = Math.floor(Math.random() * 10000).toString().padStart(5, '0');
+      return `ORD-${year}${month}${day}-${random}`;
+    }
+    
+    // Get username from URL
+    const params = new URLSearchParams(window.location.search);
+    const username = params.get('username') || 'username';
+    
+    document.getElementById('displayUsername').textContent = '@' + username;
+    document.getElementById('orderId').textContent = generateOrderId();
+    
+    // Countdown Timer
+    function updateCountdown() {
+      let hours = 24;
+      let minutes = 0;
+      let seconds = 0;
+      
+      const interval = setInterval(() => {
+        seconds--;
+        
+        if (seconds < 0) {
+          seconds = 59;
+          minutes--;
+        }
+        
+        if (minutes < 0) {
+          minutes = 59;
+          hours--;
+        }
+        
+        if (hours < 0) {
+          clearInterval(interval);
+          document.getElementById('countdown').textContent = 'Followers Delivered!';
+          document.getElementById('countdown').style.color = '#4caf50';
+          return;
+        }
+        
+        const display = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        document.getElementById('countdown').textContent = display;
+      }, 1000);
+    }
+    
+    updateCountdown();
+    
+    // Copy Order ID
+    function copyOrderId() {
+      const orderId = document.getElementById('orderId').textContent;
+      navigator.clipboard.writeText(orderId).then(() => {
+        alert('Order ID copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>
