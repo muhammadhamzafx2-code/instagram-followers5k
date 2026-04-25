@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share to Unlock - Claim Your 5K Followers</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .share-container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .share-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .share-header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    
+    .share-header p {
+      font-size: 0.95rem;
+      opacity: 0.95;
+    }
+    
+    .share-content {
+      padding: 2rem;
+    }
+    
+    .unlock-message {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: #e65100;
+      line-height: 1.6;
+    }
+    
+    .progress-section {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    
+    .progress-title {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .progress-circle {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+    
+    .progress-circle::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      background: white;
+      z-index: 1;
+    }
+    
+    .progress-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    
+    .progress-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #667eea;
+    }
+    
+    .progress-label {
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+    
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    
+    .share-platforms {
+      margin-bottom: 2.5rem;
+    }
+    
+    .share-title {
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .share-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      background: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .share-button:hover {
+      border-color: #667eea;
+      background: #f8f9ff;
+      transform: translateY(-2px);
+    }
+    
+    .share-button.whatsapp {
+      color: #25d366;
+    }
+    
+    .share-button.whatsapp:hover {
+      border-color: #25d366;
+      background: #f0fef4;
+    }
+    
+    .share-button.facebook {
+      color: #1877f2;
+    }
+    
+    .share-button.facebook:hover {
+      border-color: #1877f2;
+      background: #f0f7ff;
+    }
+    
+    .share-button.twitter {
+      color: #1da1f2;
+    }
+    
+    .share-button.twitter:hover {
+      border-color: #1da1f2;
+      background: #f0f7ff;
+    }
+    
+    .share-button.telegram {
+      color: #0088cc;
+    }
+    
+    .share-button.telegram:hover {
+      border-color: #0088cc;
+      background: #f0f5ff;
+    }
+    
+    .share-button.email {
+      color: #ea4335;
+    }
+    
+    .share-button.email:hover {
+      border-color: #ea4335;
+      background: #fff5f4;
+    }
+    
+    .share-button.copy {
+      color: #667eea;
+    }
+    
+    .share-button.copy:hover {
+      border-color: #667eea;
+      background: #f8f9ff;
+    }
+    
+    .icon {
+      font-size: 1.3rem;
+    }
+    
+    .shared-list {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .shared-list h3 {
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .shared-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .shared-item:last-child {
+      border-bottom: none;
+    }
+    
+    .shared-item-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #4caf50;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    
+    .shared-item-pending {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #ffc107;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #ffc107;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+    }
+    
+    .shared-item-name {
+      flex: 1;
+      margin-left: 1rem;
+    }
+    
+    .verification-code {
+      background: #e8f5e9;
+      border: 2px dashed #4caf50;
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      display: none;
+    }
+    
+    .verification-code.show {
+      display: block;
+      animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .verification-code h3 {
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+    }
+    
+    .verification-code-display {
+      background: white;
+      border: 1px solid #4caf50;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #2e7d32;
+      margin: 1rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .verification-code-display:hover {
+      background: #f1f8f6;
+    }
+    
+    .verification-message {
+      font-size: 0.85rem;
+      color: #558b2f;
+    }
+    
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    
+    .btn {
+      padding: 0.85rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #1a1a1a;
+      border: 2px solid #e0e0e0;
+    }
+    
+    .btn-secondary:hover {
+      border-color: #667eea;
+      color: #667eea;
+    }
+    
+    .skip-link {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+    }
+    
+    .skip-link a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    
+    .skip-link a:hover {
+      color: #764ba2;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal.show {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .modal-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .modal-content h2 {
+      font-size: 1.3rem;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    
+    .modal-content p {
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    
+    .modal-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .modal-buttons button {
+      flex: 1;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-btn-confirm {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .modal-btn-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .modal-btn-cancel {
+      background: #f0f0f0;
+      color: #1a1a1a;
+      border: 2px solid #e0e0e0;
+    }
+    
+    .modal-btn-cancel:hover {
+      border-color: #667eea;
+    }
+    
+    .copy-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #323232;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      z-index: 2000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .copy-toast.show {
+      opacity: 1;
+    }
+    
+    @media (max-width: 600px) {
+      .share-container {
+        border-radius: 0;
+      }
+      
+      .share-content {
+        padding: 1.5rem;
+      }
+      
+      .platforms-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .action-buttons {
+        grid-template-columns: 1fr;
+      }
+      
+      .progress-circle {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .progress-number {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="share-container">
+    <!-- Header -->
+    <div class="share-header">
+      <h1>🎁 Share to Unlock</h1>
+      <p>Share with friends to claim your 5K followers instantly!</p>
+    </div>
+    
+    <!-- Content -->
+    <div class="share-content">
+      <!-- Warning Message -->
+      <div class="unlock-message">
+        ⚠️ <strong>Verify your claim:</strong> Share this link with 10 friends to confirm and unlock your followers instantly!
+      </div>
+      
+      <!-- Progress Section -->
+      <div class="progress-section">
+        <div class="progress-title">Shares Confirmed</div>
+        <div class="progress-circle">
+          <div class="progress-text">
+            <div class="progress-number" id="shareCount">0</div>
+            <div class="progress-label">/ 10</div>
+          </div>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+      </div>
+      
+      <!-- Share Platforms -->
+      <div class="share-platforms">
+        <div class="share-title">Share This Link</div>
+        
+        <div class="platforms-grid">
+          <button class="share-button whatsapp" id="whatsappBtn">
+            <span class="icon">💬</span>
+            <span>WhatsApp</span>
+          </button>
+          <button class="share-button facebook" id="facebookBtn">
+            <span class="icon">👍</span>
+            <span>Facebook</span>
+          </button>
+          <button class="share-button twitter" id="twitterBtn">
+            <span class="icon">𝕏</span>
+            <span>Twitter</span>
+          </button>
+          <button class="share-button telegram" id="telegramBtn">
+            <span class="icon">✈️</span>
+            <span>Telegram</span>
+          </button>
+          <button class="share-button email" id="emailBtn">
+            <span class="icon">📧</span>
+            <span>Email</span>
+          </button>
+          <button class="share-button copy" id="copyBtn">
+            <span class="icon">📋</span>
+            <span>Copy Link</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Shared List -->
+      <div class="shared-list">
+        <h3>Share Status</h3>
+        <div id="sharedListContainer">
+          <div class="shared-item">
+            <span class="shared-item-name">Waiting for shares...</span>
+            <span class="shared-item-pending">?</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Verification Code (shown when complete) -->
+      <div class="verification-code" id="verificationCode">
+        <h3>✓ All Shares Confirmed!</h3>
+        <p style="color: #2e7d32; font-size: 0.9rem; margin-bottom: 1rem;">Your verification is complete. Share this code with support if needed:</p>
+        <div class="verification-code-display" id="codeDisplay">VER-2024-12345</div>
+        <p class="verification-message">Your followers will be delivered within 24 hours</p>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn btn-secondary" id="backBtn">← Back</button>
+        <button class="btn btn-primary" id="continueBtn" disabled>Continue →</button>
+      </div>
+      
+      <div class="skip-link">
+        <a href="#" id="skipLink">Skip verification (optional)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share Verification Modal -->
+  <div class="modal" id="shareModal">
+    <div class="modal-content">
+      <div class="modal-icon">🎉</div>
+      <h2>Share Successful!</h2>
+      <p id="modalMessage">Your share has been recorded. Thank you for helping us grow!</p>
+      <div class="modal-buttons">
+        <button class="modal-btn-confirm" id="modalConfirmBtn">Great! Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="copy-toast" id="copyToast">✓ Link copied to clipboard!</div>
+
+  <script>
+    // Get username from URL
+    const params = new URLSearchParams(window.location.search);
+    const username = params.get('username') || 'user';
+    
+    // Generate share link
+    const shareLink = window.location.origin + '/share.html?ref=' + encodeURIComponent(username) + '&platform=web';
+    const shareMessage = `🎁 Claim 5K FREE Instagram Followers! Join me and get instant followers. No credit card needed! ${shareLink}`;
+    
+    let sharedCount = parseInt(localStorage.getItem('sharedCount_' + username) || '0');
+    
+    // Update UI on load
+    updateShareCount();
+    
+    // Share button handlers
+    document.getElementById('whatsappBtn').addEventListener('click', () => {
+      const text = encodeURIComponent(shareMessage);
+      window.open(`https://wa.me/?text=${text}`, '_blank');
+      recordShare('WhatsApp');
+    });
+    
+    document.getElementById('facebookBtn').addEventListener('click', () => {
+      const url = encodeURIComponent(shareLink);
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+      recordShare('Facebook');
+    });
+    
+    document.getElementById('twitterBtn').addEventListener('click', () => {
+      const text = encodeURIComponent(shareMessage);
+      window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+      recordShare('Twitter');
+    });
+    
+    document.getElementById('telegramBtn').addEventListener('click', () => {
+      const url = encodeURIComponent(shareLink);
+      const text = encodeURIComponent('🎁 Claim 5K FREE Instagram Followers!');
+      window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+      recordShare('Telegram');
+    });
+    
+    document.getElementById('emailBtn').addEventListener('click', () => {
+      const subject = encodeURIComponent('Get 5K Free Instagram Followers!');
+      const body = encodeURIComponent(shareMessage);
+      window.open(`mailto:?subject=${subject}&body=${body}`, '_blank');
+      recordShare('Email');
+    });
+    
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      navigator.clipboard.writeText(shareLink).then(() => {
+        showCopyToast();
+        recordShare('Direct Link');
+      });
+    });
+    
+    // Record share
+    function recordShare(platform) {
+      if (sharedCount < 10) {
+        sharedCount++;
+        localStorage.setItem('sharedCount_' + username, sharedCount.toString());
+        updateShareCount();
+        showShareModal(platform);
+      }
+    }
+    
+    // Update share count display
+    function updateShareCount() {
+      document.getElementById('shareCount').textContent = sharedCount;
+      
+      // Update progress bar
+      const progress = (sharedCount / 10) * 100;
+      document.getElementById('progressBarFill').style.width = progress + '%';
+      
+      // Update shared list
+      updateSharedList();
+      
+      // Show verification code and enable continue if complete
+      if (sharedCount >= 10) {
+        document.getElementById('verificationCode').classList.add('show');
+        document.getElementById('continueBtn').disabled = false;
+        document.getElementById('continueBtn').style.cursor = 'pointer';
+        generateVerificationCode();
+      } else {
+        document.getElementById('continueBtn').disabled = true;
+        document.getElementById('continueBtn').style.cursor = 'not-allowed';
+      }
+    }
+    
+    // Update shared list
+    function updateSharedList() {
+      const platforms = ['WhatsApp', 'Facebook', 'Twitter', 'Telegram', 'Email', 'Direct Link'];
+      let listHTML = '';
+      
+      for (let i = 1; i <= 10; i++) {
+        const isShared = i <= sharedCount;
+        const platform = platforms[(i - 1) % platforms.length];
+        
+        listHTML += `
+          <div class="shared-item">
+            <span class="shared-item-name">Share ${i}</span>
+            ${isShared ? '<span class="shared-item-check">✓</span>' : '<span class="shared-item-pending">○</span>'}
+          </div>
+        `;
+      }
+      
+      document.getElementById('sharedListContainer').innerHTML = listHTML;
+    }
+    
+    // Show share modal
+    function showShareModal(platform) {
+      const modal = document.getElementById('shareModal');
+      const message = document.getElementById('modalMessage');
+      message.textContent = `Your share to ${platform} has been recorded (${sharedCount}/10 completed)`;
+      modal.classList.add('show');
+      
+      setTimeout(() => {
+        modal.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Show copy toast
+    function showCopyToast() {
+      const toast = document.getElementById('copyToast');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+    
+    // Generate verification code
+    function generateVerificationCode() {
+      const date = new Date();
+      const random = Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+      const code = `VER-${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}-${random}`;
+      document.getElementById('codeDisplay').textContent = code;
+      localStorage.setItem('verificationCode_' + username, code);
+    }
+    
+    // Modal confirm button
+    document.getElementById('modalConfirmBtn').addEventListener('click', () => {
+      document.getElementById('shareModal').classList.remove('show');
+    });
+    
+    // Back button
+    document.getElementById('backBtn').addEventListener('click', () => {
+      window.history.back();
+    });
+    
+    // Continue button
+    document.getElementById('continueBtn').addEventListener('click', () => {
+      if (sharedCount >= 10) {
+        window.location.href = 'verification.html?username=' + encodeURIComponent(username);
+      }
+    });
+    
+    // Skip button
+    document.getElementById('skipLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      if (confirm('⚠️ Are you sure you want to skip? You may not get your followers instantly.')) {
+        window.location.href = 'verification.html?username=' + encodeURIComponent(username);
+      }
+    });
+    
+    // Copy code on click
+    document.getElementById('codeDisplay').addEventListener('click', () => {
+      const code = document.getElementById('codeDisplay').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        showCopyToast();
+      });
+    });
+  </script>
+</body>
+</html>
